@@ -14,3 +14,5 @@ Implemented a .before function in attempt to modify before Discord tampers with 
 
 This is an **attempt** to fix recent crashing, further versions may be pushed if issues continue.
 If the issue persists, ensure to narrow down what is making it crash so other possible resoloutions can be used.
+
+Feedback is more than welcome, please star the repository too!
