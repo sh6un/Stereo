@@ -1,0 +1,13 @@
+{
+  "files": [
+    "discord_voice.node",
+    "gpu_encoder_helper.exe",
+    "openh264-2.6.0-win64.dll",
+    "selfie_segmentation.tflite",
+    "selfie_segmentation_landscape.tflite",
+    "mediapipe.dll",
+    "package.json",
+    "index.js",
+    "manifest.json"
+  ]
+}
