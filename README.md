@@ -1,18 +1,16 @@
 # BetterDiscord Stereo 
-Last Update : November 17th 2025
+Last Update : November 24th 2025
 
 ## Changelog
-**{ * } Attempted to fix recent crashing by :**
+**{ * } Crashing has been fixed :**
 ```
-Replacing 'updateVideoQuality' module with 'setRemoteVideoSinkWants'.
-Added a weakSet to track patching, ensuring it doesn't occur numerous times.
-Options.fec check, to ensure it exists before pushing it to false.
-Implemented a .before function in attempt to modify before Discord tampers with it.
+Crashing has been fixed by replacing ffmpeg and amending plugin issues thanks to ascend.
+See previous read-me versions to view plugin updates.
 ```
 
-**{ * } Update Prompts, to ensure you are on the latest plugin version.**
-
-This is an **attempt** to fix recent crashing, further versions may be pushed if issues continue.
-If the issue persists, ensure to narrow down what is making it crash so other possible resoloutions can be used.
-
+**IMPORTANT NOTE**
+This does fix crashing occurred by cameras starting and screenshares, however most mp4(s) and mp3(s) will not work, we are looking for a permanent fix to all issues please join the Discord to receive the latest updates.
 Feedback is more than welcome, please star the repository too!
+
+Once again, thanks to ascend for fixing this issue and helping with the majority of this!
+https://discord.gg/rCcHdjzY
