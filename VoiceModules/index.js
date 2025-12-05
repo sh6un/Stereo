@@ -47,10 +47,11 @@ if (isLogDirAvailable) {
 }
 
 const defaultAudioSubsystem = process.platform === 'win32' ? 'experimental' : 'standard';
-const audioSubsystem = appSettings
+const useLegacyAudioDevice = appSettings ? appSettings.getSync('useLegacyAudioDevice') : false;
+const audioSubsystemSelected = appSettings
   ? appSettings.getSync('audioSubsystem', defaultAudioSubsystem)
   : defaultAudioSubsystem;
-const offloadAdmControls = appSettings ? appSettings.getSync('offloadAdmControls', false) : false;
+const audioSubsystem = useLegacyAudioDevice || audioSubsystemSelected;
 const debugLogging = appSettings ? appSettings.getSync('debugLogging', true) : true;
 
 function versionGreaterThanOrEqual(v1, v2) {
@@ -65,7 +66,7 @@ function versionGreaterThanOrEqual(v1, v2) {
   }
   return true;
 }
-// shaun
+
 function parseArguments(args) {
   const parsed = {
     'log-level': -1,
@@ -76,7 +77,7 @@ function parseArguments(args) {
     'use-fake-video-capture': 'Use fake video capture device.',
     'use-file-for-fake-video-capture': 'Use local file for fake video capture.',
     'use-fake-audio-capture': 'Use fake audio capture device.',
-    'use-files-for-fake-audio-capture': 'Use local files for fake audio capture.',
+    'use-file-for-fake-audio-capture': 'Use local file for fake audio capture.',
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -112,8 +113,8 @@ function parseArguments(args) {
       case '--use-fake-audio-capture':
         parsed['use-fake-audio-capture'] = true;
         break;
-      case '--use-files-for-fake-audio-capture':
-        parsed['use-files-for-fake-audio-capture'] = getValue();
+      case '--use-file-for-fake-audio-capture':
+        parsed['use-file-for-fake-audio-capture'] = getValue();
         break;
     }
   }
@@ -126,7 +127,7 @@ const logLevel = argv['log-level'] === -1 ? (debugLogging ? 2 : -1) : argv['log-
 const useFakeVideoCapture = argv['use-fake-video-capture'];
 const useFileForFakeVideoCapture = argv['use-file-for-fake-video-capture'];
 const useFakeAudioCapture = argv['use-fake-audio-capture'];
-const useFilesForFakeAudioCapture = argv['use-files-for-fake-audio-capture'];
+const useFileForFakeAudioCapture = argv['use-file-for-fake-audio-capture'];
 
 features.declareSupported('voice_panning');
 features.declareSupported('voice_multiple_connections');
@@ -151,8 +152,6 @@ features.declareSupported('bandwidth_estimation_experiments');
 features.declareSupported('mls_pairwise_fingerprints');
 features.declareSupported('soundshare');
 features.declareSupported('screen_soundshare');
-features.declareSupported('offload_adm_controls');
-features.declareSupported('audio_codec_red');
 
 if (process.platform === 'darwin') {
   features.declareSupported('screen_capture_kit');
@@ -170,7 +169,7 @@ if (process.platform === 'linux') {
 }
 
 if (
-  (process.platform === 'win32' && process.arch !== 'arm64')
+  process.platform === 'win32'
   || (process.platform === 'darwin' && versionGreaterThanOrEqual(os.release(), '16.0.0'))
 ) {
   features.declareSupported('mediapipe');
@@ -194,10 +193,10 @@ if (process.platform === 'win32') {
   features.declareSupported('voice_experimental_subsystem');
   features.declareSupported('voice_automatic_subsystem');
   features.declareSupported('voice_subsystem_deferred_switch');
-  features.declareSupported('voice_bypass_system_audio_input_processing');
   // NOTE(jvass): currently there's no experimental encoders! Add this back if you
   // add one and want to re-enable the UI for them.
   // features.declareSupported('experimental_encoders');
+  features.declareSupported('capture_timeout_experiments');
   features.declareSupported('clips');
 }
 
@@ -309,6 +308,7 @@ const setAudioSubsystemInternal = function (subsystem, forceRestart) {
   }
 
   appSettings.set('audioSubsystem', subsystem);
+  appSettings.set('useLegacyAudioDevice', false);
 
   if (isElectronRenderer) {
     if (forceRestart) {
@@ -330,10 +330,6 @@ VoiceEngine.setAudioSubsystem = function (subsystem) {
 
 VoiceEngine.queueAudioSubsystem = function (subsystem) {
   setAudioSubsystemInternal(subsystem, false);
-};
-
-VoiceEngine.setOffloadAdmControls = function (doOffload) {
-  appSettings.set('offloadAdmControls', doOffload);
 };
 
 VoiceEngine.setDebugLogging = function (enable) {
@@ -537,8 +533,7 @@ VoiceEngine.initialize({
   useFakeVideoCapture,
   useFileForFakeVideoCapture,
   useFakeAudioCapture,
-  useFilesForFakeAudioCapture,
-  offloadAdmControls,
+  useFileForFakeAudioCapture,
 });
 
 module.exports = VoiceEngine;
