@@ -1,9 +1,8 @@
 # BetterDiscord Stereo 
-Last Update : November 24th 2025
+Last Update : 06 Desember 2025
 
 ## Changelog
-**{ * } Crashing has been fixed :**
+**{ * } <Memper Baiki Crash> :**
 ```
-Crashing has been fixed by replacing ffmpeg and amending plugin issues thanks to ascend.
-See previous read-me versions to view plugin updates.
+Crash terjadi karena FFMPEG terjadi error, makannya saya menggunakan FFMPEG yang saya update ini agar tidak crash discord nya!
 ```
