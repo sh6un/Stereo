@@ -1,16 +1,13 @@
 # BetterDiscord Stereo 
-Last Update : November 24th 2025
+Last Update : December 26th 2025
 
 ## Changelog
-**{ * } Crashing has been fixed :**
+**{ * } All issues have been resolved by @LOOF-Sys/Cypher by creating a hard patched node.**
+**{ * } New Folder has been created for deprecated files and usage.**
 ```
-Crashing has been fixed by replacing ffmpeg and amending plugin issues thanks to ascend.
-See previous read-me versions to view plugin updates.
+All issues regarding media, crashing and such have been fixed when using the newest stereo installer.
 ```
 
-**IMPORTANT NOTE**
-This does fix crashing occurred by cameras starting and screenshares, however most mp4(s) and mp3(s) will not work, we are looking for a permanent fix to all issues please join the Discord to receive the latest updates.
-Feedback is more than welcome, please star the repository too!
 
-Once again, thanks to ascend for fixing this issue and helping with the majority of this!
+Once again, thanks to LOOF-Sys/Cypher for fixing this issue and helping with the majority of this!
 https://discord.gg/rCcHdjzY
