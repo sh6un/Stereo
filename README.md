@@ -1,5 +1,5 @@
-# BetterDiscord Stereo 
-Last Update : December 26th 2025
+# Discord Stereo [ Filterless Modules ]
+Last Update : January 5th 2026
 
 ## Changelog
 **{ * } All issues have been resolved by @LOOF-Sys/Cypher by creating a hard patched node.**
@@ -10,4 +10,4 @@ All issues regarding media, crashing and such have been fixed when using the new
 
 
 Once again, thanks to LOOF-Sys/Cypher for fixing this issue and helping with the majority of this!
-https://discord.gg/rCcHdjzY
+https://discord.gg/CEuGTAxXR8
